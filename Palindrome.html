@@ -46,7 +46,6 @@
                     fillTextArea('Ř4řEřichAhciřeř4ř');
                     break;
                 default:
-                    palindrome();
             }
             palindrome();
         }
@@ -54,6 +53,11 @@
         /* This one is simple..*/
         function removeSpaces(string) {
             return string.replace(/\s/g, '');
+        }
+
+        function clean() {
+            cleanTextArea();
+            cleanResultBox();
         }
 
         /* I know it's ugly, right? But it's still the way..*/
@@ -128,14 +132,14 @@
 
 <h4 style="text-align:center">Je palindrom?</h4>
 <div class="centerText">
-    <label for="result"></label><textarea id='result' name="result" size="80" disabled></textarea>
+    <label for="result"></label><textarea id='result' name="result" disabled></textarea>
     <label for="mainTextArea"></label><textarea oninput="palindrome()" id="mainTextArea" name='mainTextArea'
                                                 style="width:90%;height:171px"></textarea><br>
     <input type="button" onclick="unitTest(1)" name="Unit #1" value="Unit #1" class="button">
     <input type="button" onclick="unitTest(2)" name="Unit #2" value="Unit #2" class="button">
     <input type="button" onclick="unitTest(3)" name="Unit #3" value="Unit #3" class="button">
     <input type="button" onclick="unitTest(4)" name="Unit #4" value="Unit #4" class="button">
-    <input type="button" onclick="cleanResultBox(), cleanTextArea()" value="Reset" class="button">
+    <input type="button" onclick="clean()" value="Reset" class="button">
 
 </div>
 
