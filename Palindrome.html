@@ -6,9 +6,14 @@
     <style>
 
     </style>
-    <title>Je Palindrom?</title>
+    <title>Palindrome checker - Jakub Pluhař</title>
 
     <script type="text/javascript">
+
+
+        window.onbeforeunload = function () {
+            clean();
+        };
 
         /* Inputs text (This is for buttons). */
         function fillTextArea(text) {
@@ -150,7 +155,8 @@
 <body>
 
 
-<h4 style="text-align:center">Je palindrom?</h4>
+<h4 style="text-align:center">My motto is Keep It Simple as Possible that is why code is written in native javascript
+    (I'am also Java guy..)</h4>
 <div class="centerText">
     <label for="result"></label><textarea id='result' name="result" disabled></textarea>
     <label for="mainTextArea"></label><textarea oninput="palindrome()" id="mainTextArea" name='mainTextArea'
