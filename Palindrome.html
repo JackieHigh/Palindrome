@@ -95,31 +95,36 @@
                 .replace(new RegExp('Ž', 'g'), 'Z');
         }
 
-        /* Main palindrome check logic is here... */
         function palindrome() {
-
             let colorValid = 'background:lightgreen';
             let colorInvalid = 'background:red';
+            let inputText = document.getElementById("mainTextArea").value;
 
-            let myString = document.getElementById("mainTextArea").value;
+            let isPalindrome = checkPalindrome(inputText);
+            if (isPalindrome) {
+                document.getElementById("result").setAttribute('value', 'Je palindrom');
+                document.getElementById("result").setAttribute('style', colorValid);
+            }
+            else {
+                document.getElementById("result").setAttribute('value', 'Není palindrom');
+                document.getElementById("result").setAttribute('style', colorInvalid);
+            }
+        }
+
+        /* Returns true if  */
+        function checkPalindrome(string) {
 
             /* remove special characters, spaces and make lowercase*/
-            let removeChar = removeDiacritic(myString).toString().replace(/[^A-Za-z0-9]/ig, "").toLowerCase();
+            let removeChar = removeDiacritic(string).toString().replace(/[^A-Za-z0-9]/ig, "").toLowerCase();
 
             /* reverse text for comparison*/
             let checkPalindrome = removeChar.split('').reverse().join('');
             if (removeChar === '') {
-                cleanResultBox();
+                clean();
                 return;
             }
             /* Check to see if String is a Palindrome*/
-            if (removeChar === checkPalindrome) {
-                document.getElementById("result").setAttribute('value', 'Je palindrom');
-                document.getElementById("result").setAttribute('style', colorValid);
-            } else {
-                document.getElementById("result").setAttribute('value', 'Není palindrom');
-                document.getElementById("result").setAttribute('style', colorInvalid);
-            }
+            return removeChar === checkPalindrome;
 
         }
 
