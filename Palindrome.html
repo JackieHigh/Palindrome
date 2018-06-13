@@ -10,12 +10,12 @@
 
     <script type="text/javascript">
 
-        /* Inputs text (This is for buttons)*/
+        /* Inputs text (This is for buttons). */
         function fillTextArea(text) {
             document.getElementById("mainTextArea").value = text.toString();
         }
 
-        /* Cleans result box*/
+        /* Cleans result box. */
         function cleanResultBox() {
             document.getElementById("result").setAttribute('value', 'Nebylo testováno');
             document.getElementById("result").setAttribute('style', 'white');
@@ -50,7 +50,7 @@
             palindrome();
         }
 
-        /* This one is simple..*/
+        /* This one is simple.. */
         function removeSpaces(string) {
             return string.replace(/\s/g, '');
         }
@@ -60,7 +60,7 @@
             cleanResultBox();
         }
 
-        /* I know it's ugly, right? But it's still the way..*/
+        /* I know it's ugly, right? But it's still the way.. */
         function removeDiacritic(string) {
             return removeSpaces(string)
                 .replace(new RegExp('á', 'g'), 'a')
@@ -111,19 +111,34 @@
             }
         }
 
-        /* Returns true if  */
+        /* Mirrors the input if it's not palindrome already. */
+        function makePalindrome() {
+            let inputText = document.getElementById("mainTextArea").value;
+            if (checkPalindrome(inputText) === false) {
+                inputText += reverse(inputText);
+                document.getElementById("mainTextArea").value = inputText;
+                palindrome();
+            }
+        }
+
+        /* Reverses input string. */
+        function reverse(string) {
+            return string.split("").reverse().join("");
+        }
+
+        /* Returns true if input string is palindrome.  */
         function checkPalindrome(string) {
 
-            /* remove special characters, spaces and make lowercase*/
+            /* Remove special characters, spaces and make lowercase. */
             let removeChar = removeDiacritic(string).toString().replace(/[^A-Za-z0-9]/ig, "").toLowerCase();
 
-            /* reverse text for comparison*/
-            let checkPalindrome = removeChar.split('').reverse().join('');
+            /* Reverse text for comparison. */
+            let checkPalindrome = reverse(removeChar);
             if (removeChar === '') {
                 clean();
                 return;
             }
-            /* Check to see if String is a Palindrome*/
+            /* Check to see if string is a palindrome. */
             return removeChar === checkPalindrome;
 
         }
@@ -145,12 +160,13 @@
     <input type="button" onclick="unitTest(3)" name="Unit #3" value="Unit #3" class="button">
     <input type="button" onclick="unitTest(4)" name="Unit #4" value="Unit #4" class="button">
     <input type="button" onclick="clean()" value="Reset" class="button">
+    <input type="button" onclick="makePalindrome()" value="Udělej palindrom!" class="button">
 
 </div>
 
 <div>
     <p style="text-align: center">
-        Version 0.0.1. Alpha
+        Version 0.0.2 Alpha
     </p>
 </div>
 </body>
