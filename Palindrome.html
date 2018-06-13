@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<!-- saved from url=(0028)https://www.lettercount.com/ -->
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <style>
+
+    </style>
+    <title>Je Palindrom?</title>
+
+    <script type="text/javascript">
+
+        /* Inputs text (This is for buttons)*/
+        function fillTextArea(text) {
+            document.getElementById("mainTextArea").value = text.toString();
+        }
+
+        /* Cleans result box*/
+        function cleanResultBox() {
+            document.getElementById("result").setAttribute('value', 'Nebylo testováno');
+            document.getElementById("result").setAttribute('style', 'white');
+        }
+
+        /* Cleans input box */
+        function cleanTextArea() {
+            document.getElementById("mainTextArea").value = '';
+        }
+
+        /* Homemade Unit Tests (Sorry I'am Java developer...) */
+        function unitTest(variant) {
+            switch (variant) {
+                case 1:
+                    fillTextArea('Jelenovi pivo nelej');
+                    break;
+                case 2:
+                    fillTextArea('Tahle věta rozhodně nění palindrom');
+                    break;
+                case 3:
+                    let text = 'a';
+                    for (let i = 1; i < 1000000; i++) {
+                        text += 'a'
+                    }
+                    fillTextArea(text);
+                    break;
+                default:
+                    palindrome();
+            }
+            palindrome();
+        }
+
+        /* Main palindrome check logic is here... */
+        function palindrome() {
+
+            let colorValid = 'background:lightgreen';
+            let colorInvalid = 'background:red';
+
+            let myString = document.getElementById("mainTextArea").value;
+
+            /* remove special characters, spaces and make lowercase*/
+            let removeChar = myString.toString().replace(/[^A-Z0-9]/ig, "").toLowerCase();
+
+            /* reverse text for comparison*/
+            let checkPalindrome = removeChar.split('').reverse().join('');
+            if (removeChar === '') {
+                cleanResultBox();
+                return;
+            }
+            /* Check to see if String is a Palindrome*/
+            if (removeChar === checkPalindrome) {
+                document.getElementById("result").setAttribute('value', 'Je palindrom');
+                document.getElementById("result").setAttribute('style', colorValid);
+            } else {
+                document.getElementById("result").setAttribute('value', 'Není palindrom');
+                document.getElementById("result").setAttribute('style', colorInvalid);
+            }
+
+        }
+
+
+    </script>
+</head>
+
+<body>
+
+
+<h4 style="text-align:center">Je palindrom?</h4>
+<div class="centerText">
+    <label for="result"></label><textarea id='result' name="result" size="80" disabled></textarea>
+    <label for="mainTextArea"></label><textarea oninput="palindrome()" id="mainTextArea" name='mainTextArea'
+                                                style="width:90%;height:171px"></textarea><br>
+    <input type="button" onclick="unitTest(1)" name="Unit #1" value="Unit #1" class="button">
+    <input type="button" onclick="unitTest(2)" name="Unit #2" value="Unit #2" class="button">
+    <input type="button" onclick="unitTest(3)" name="Unit #3" value="Unit #3" class="button">
+    <input type="button" onclick="cleanResultBox(), cleanTextArea()" value="Reset" class="button">
+
+</div>
+
+<div>
+    <p style="text-align: center">
+        Version 0.0.1. Alpha
+    </p>
+</div>
+</body>
+</html>
